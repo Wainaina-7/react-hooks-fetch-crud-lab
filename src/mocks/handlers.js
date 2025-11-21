@@ -1,7 +1,13 @@
 import { rest } from "msw";
 import { data } from "./data";
 
-let questions = data;
+let questions;
+
+export function resetQuestions() {
+  questions = data.map((q) => ({ ...q, answers: [...q.answers] }));
+}
+
+resetQuestions();
 
 export const handlers = [
   rest.get("http://localhost:4000/questions", (req, res, ctx) => {
